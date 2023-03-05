@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 import './cell.css';
 
-const Cell = ({id, hasMine, isClicked, isOpened, isMarked, isMaybeMarked, minesAround, openCell, changeMark, start, startGame, countMines, gameOver }) => (
+const Cell = ({id, hasMine, isClicked, isOpened, isMarked, isMaybeMarked, minesAround, openCell, changeMark, start, startGame, countMines, gameOver, loss}) => (
     <i onMouseUp={(event) => {
         if (event.button === 0) {
             if (!start) {
                 startGame(id, countMines);
             }
-            openCell(id, gameOver);
+            openCell(id, gameOver, loss);
 
         } else {
             changeMark(id)

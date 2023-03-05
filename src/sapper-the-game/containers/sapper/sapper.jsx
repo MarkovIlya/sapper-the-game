@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Field from "../../components/field/field";
 import Menu from "../../components/menu/menu";
-import {changeMark, gameOver, openCell, startGame} from "../../actions/actionCreator";
+import {changeMark, gameOver, openCell, restartGame, startGame} from "../../actions/actionCreator";
 import game from "../../Game";
 
 class Sapper extends Component {
@@ -43,19 +43,39 @@ class Sapper extends Component {
     }
 
     restartGame = () => {
+        this.setState({
+            countUnmarkedMines: 40,
+            countMines: 40,
+            time: 0,
+            start: false,
+            win: false,
+            loss: false,
+        })
 
+        const { restartGame } = this.props;
+        restartGame();
     }
 
     render() {
 
-        const { start, countMines } = this.state;
+        const { start, countMines, loss } = this.state;
 
-        const { cells, openCell, changeMark } = this.props;
+        const { cells, openCell, changeMark, restartGame } = this.props;
 
         return (
             <div className="sapper">
-                <Menu dimension={16} />
-                <Field cells={cells} dimension={16} openCell={openCell} changeMark={changeMark} start={start} startGame={this.startGame} countMines={countMines} gameOver={this.gameOver}/>
+                <Menu dimension={16} restartGame={restartGame}/>
+                <Field
+                    cells={cells}
+                    dimension={16}
+                    openCell={openCell}
+                    changeMark={changeMark}
+                    start={start}
+                    startGame={this.startGame}
+                    countMines={countMines}
+                    gameOver={this.gameOver}
+                    loss={loss}
+                />
             </div>
         );
     }
@@ -64,4 +84,4 @@ class Sapper extends Component {
 
 export default connect(({cells}) => ({
     cells,
-}), { openCell, changeMark, startGame })(Sapper);
+}), { openCell, changeMark, startGame, restartGame })(Sapper);

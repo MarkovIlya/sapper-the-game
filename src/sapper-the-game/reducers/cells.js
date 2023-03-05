@@ -1,5 +1,5 @@
 import { load } from 'redux-localstorage-simple';
-import {CHANGE_MARK, GAME_OVER, OPEN_CELL, SHOW_MINES, START_GAME} from "../../constants";
+import {CHANGE_MARK, GAME_OVER, OPEN_CELL, RESTART_GAME, SHOW_MINES, START_GAME} from "../../constants";
 //
 // let Cells = load({ namespace: 'sapper' });
 //
@@ -121,12 +121,12 @@ const arrayRandElement = (arr) => {
     return arr[rand];
 }
 
-const cells = (state = createCells(), { type, id, countMines, gameOver }) => {
+const cells = (state = createCells(), { type, id, countMines, gameOver, loss }) => {
     switch (type) {
         case OPEN_CELL:
             return [...state].map(cell => {
                 if (cell.id === id) {
-                    if (!cell.isOpened && !cell.isMarked) {
+                    if (!cell.isOpened && !cell.isMarked && !loss) {
                         cell.isOpened = true;
                         cell.isClicked = true;
                     }
@@ -165,12 +165,8 @@ const cells = (state = createCells(), { type, id, countMines, gameOver }) => {
                 }
             });
             return state;
-        case GAME_OVER:
-            state.map(cel => {
-                if (cel.hasMine) {
-                    cel.isOpened = true;
-                }
-            })
+        case RESTART_GAME:
+            state = createCells();
             return state;
         default:
             return state;
