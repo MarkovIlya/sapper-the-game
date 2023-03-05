@@ -1,0 +1,50 @@
+.cell {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    height: 16px;
+    width: 16px;
+    float: left;
+    background: url(sprite.png);
+    cursor: pointer;
+}
+
+.unopened_cell {
+    background-position: 0 -51px;
+    cursor: pointer;
+}
+
+.opened_cell {
+    background-position: -17px -51px;
+    cursor: pointer;
+}
+
+.marked_cell {
+    background-position: -34px -51px;
+    cursor: pointer;
+}
+
+.maybe_marked_cell {
+    background-position: -51px -51px;
+    cursor: pointer;
+}
+
+.maybe_marked_opened_cell {
+    background-position: -68px -51px;
+    cursor: pointer;
+}
+
+.mine_cell {
+    background-position: -85px -51px;
+    cursor: pointer;
+}
+
+.opened_mine_cell {
+    background-position: -102px -51px;
+    cursor: pointer;
+}
+
+.opened_marked_cell {
+    background-position: -119px -51px;
+    cursor: pointer;
+}
