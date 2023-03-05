@@ -5,7 +5,7 @@ import Cell from '../cell/cell';
 
 import './field.css';
 
-const Field = ({ cells, dimension, openCell, changeMark, start, startGame, countMines, gameOver, loss }) => (
+const Field = ({ cells, dimension, openCell, changeMark, start, startGame, countMines, gameOver, loss, win, winGame}) => (
     <div className="field-border">
         <div className="field" style={ {height: dimension*16, width: dimension*16} }>
             {cells.map(({id, hasMine, isClicked, isOpened, isMarked, isMaybeMarked, minesAround }) => (
@@ -25,6 +25,8 @@ const Field = ({ cells, dimension, openCell, changeMark, start, startGame, count
                     countMines={countMines}
                     gameOver={gameOver}
                     loss={loss}
+                    win={win}
+                    winGame={winGame}
                 />
             ))}
         </div>

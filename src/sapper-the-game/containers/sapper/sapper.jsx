@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import Field from "../../components/field/field";
 import Menu from "../../components/menu/menu";
-import {changeMark, gameOver, openCell, restartGame, startGame} from "../../actions/actionCreator";
+import {changeMark, openCell, restartGame, startGame} from "../../actions/actionCreator";
 import game from "../../Game";
 
 class Sapper extends Component {
@@ -42,6 +42,13 @@ class Sapper extends Component {
         })
     }
 
+    winGame = () => {
+        this.showMines();
+        this.setState({
+            win: true,
+        })
+    }
+
     restartGame = () => {
         this.setState({
             countUnmarkedMines: 40,
@@ -58,23 +65,25 @@ class Sapper extends Component {
 
     render() {
 
-        const { start, countMines, loss } = this.state;
+        const { start, countMines, loss, win } = this.state;
 
         const { cells, openCell, changeMark } = this.props;
 
         return (
             <div className="sapper">
-                <Menu dimension={16} restartGame={this.restartGame}/>
+                <Menu dimension={3} restartGame={this.restartGame}/>
                 <Field
                     cells={cells}
-                    dimension={16}
+                    dimension={3}
                     openCell={openCell}
                     changeMark={changeMark}
                     start={start}
                     startGame={this.startGame}
-                    countMines={countMines}
+                    // countMines={countMines}
                     gameOver={this.gameOver}
                     loss={loss}
+                    winGame={this.winGame}
+                    win={win}
                 />
             </div>
         );

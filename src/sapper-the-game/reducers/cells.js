@@ -121,18 +121,36 @@ const arrayRandElement = (arr) => {
     return arr[rand];
 }
 
-const cells = (state = createCells(), { type, id, countMines, gameOver, loss }) => {
+const cells = (state = createCells(3), { type, id, countMines= 2, gameOver, winGame, win, loss}) => {
+    let count = 3*3 - countMines;
+    let countOpened = 0;
     switch (type) {
         case OPEN_CELL:
             return [...state].map(cell => {
                 if (cell.id === id) {
-                    if (!cell.isOpened && !cell.isMarked && !loss) {
+                    if (!cell.isOpened && !cell.isMarked && !loss ) {
                         cell.isOpened = true;
                         cell.isClicked = true;
                     }
                     if (cell.isClicked && cell.hasMine) {
                         gameOver();
+                        console.log('Вы проиграли')
+                        prompt('Вы проиграли')
                     }
+                    state.map(cel => {
+                        if (cel.isOpened && !cel.hasMine) {
+                            countOpened++;
+                        }
+                    })
+                    if (countOpened === count) {
+                        winGame();
+                        console.log('Вы победили')
+                        prompt('Вы победили')
+                    } else {
+                        console.log(countOpened);
+                        countOpened = 0;
+                    }
+
                 }
                 return cell;
             });
@@ -166,7 +184,7 @@ const cells = (state = createCells(), { type, id, countMines, gameOver, loss }) 
             });
             return state;
         case RESTART_GAME:
-            state = createCells();
+            state = createCells(3);
             return state;
         default:
             return state;
