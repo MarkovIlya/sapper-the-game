@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 import './smile.css';
 
-const Smile = ({start, win, loss}) => (
-    <div className={!start ? "smile" : 'smile_pressed'}>
+const Smile = ({start, win, loss, restartGame}) => (
+    <div onClick={() => restartGame()} className={!start ? "smile" : 'smile_pressed'}>
     </div>
 );
 

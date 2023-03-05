@@ -60,11 +60,11 @@ class Sapper extends Component {
 
         const { start, countMines, loss } = this.state;
 
-        const { cells, openCell, changeMark, restartGame } = this.props;
+        const { cells, openCell, changeMark } = this.props;
 
         return (
             <div className="sapper">
-                <Menu dimension={16} restartGame={restartGame}/>
+                <Menu dimension={16} restartGame={this.restartGame}/>
                 <Field
                     cells={cells}
                     dimension={16}

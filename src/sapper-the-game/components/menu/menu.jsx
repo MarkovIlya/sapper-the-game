@@ -7,10 +7,10 @@ import Timer from "../timer/timer";
 import Smile from "../smile/smile";
 import Counter from "../counter/counter";
 
-const Menu = ({start, win, loss, time, countMines, countUnmarkedMines, dimension}) => (
+const Menu = ({start, win, loss, time, countMines, countUnmarkedMines, dimension, restartGame}) => (
     <div className="menu" style={ {width: dimension * 36} }>
         <Counter/>
-        <Smile/>
+        <Smile restartGame={restartGame}/>
         <Timer/>
     </div>
 );
